@@ -6,10 +6,12 @@ RSpec.describe 'Static Pages' do
   	visit(root_path)
   	expect(page).to have_selector('#about')
     expect(page).to have_selector('#home')
+    expect(page).to have_title "5S Training | Home"
   	click_on('About')
   	expect(page).to have_current_path(about_path)
     expect(page).to have_selector('#about')
     expect(page).to have_selector('#home')
+    expect(page).to have_title "5S Training | About"
   	click_on('Home')
   	expect(page).to have_current_path(root_path)
   end
