@@ -2,43 +2,32 @@
 
 <div class="container">
 
-  <div class="col-md-offset-3 col-lg-offset-3 col-md-6 col-lg-6">
+  <div class="center">
 
-    <h3>
-    5S Trainer is a free site for learning about how to organize a workspace according to Lean Manufacturing principles.
-    </h3>
+    <div class="col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8">
+
+      <h3>Learn how to use 5S to organize a workspace according to Lean Manufacturing principles!</h3>
+
+      <br>
+
+      <h3>Record your progress as you read the following lessons:</h3>
+
+      <% @lessons.each do |lesson| %>
+  	     <li><h3><%= lesson.title %></h3></li>
+      <% end %>
 
     <br>
 
-    <h3>
-    You can record your progress as you read the following lessons:
-    </h3>
+      <h3>
+      Create a free account to start!
+      </h3>
 
-  </div>
+    <br>
 
-  <% @lessons.each do |lesson| %>
+        <div class="btn btn-primary">
+          <%= link_to "Sign up!", new_user_path, {style: 'color:white'} %>
+        </div>
 
-      <div class="col-md-offset-4 col-lg-offset-4 col-md-4 col-lg-4">
-        <h3>
-  	      <%= lesson.title %>
-  	    </h3>
-      </div>
-
-  <% end %>
-
-  <br>
-
-
-  <div class="col-md-offset-3 col-lg-offset-3 col-md-6 col-lg-6">
-
-    <h3>
-    In order to start, you must first create a free account.
-    </h3>
-
-    <div class="center">
-      <div class="btn btn-primary">
-        <%= link_to "Sign up!", new_user_path, {style: 'color:white'} %>
-      </div>
     </div>
 
   </div>
