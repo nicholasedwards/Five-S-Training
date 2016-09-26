@@ -39,9 +39,19 @@ RSpec.describe User do
     # So, we first have to persist an ActiveRecord object to the database so that a non-unique
     # record can be checked against the records in the database.
     # This method is slow, but I think it is necessary!
-    user = User.create(email: "valid@example.com", password_digest: "IjZAgcfl7p92ldGxad68LJZdL17lhWy")
+    user = User.create(email: "valid@example.com", password: "f00bAr!", password_confirmation: "f00bAr!")
     user_duplicate = user.dup
     expect(user_duplicate).not_to be_valid
+  end
+
+  it "validates for the presence of a password virtual attribute" do
+    user_no_password = FactoryGirl.build_stubbed(:user, password: " ")
+    expect(user_no_password).not_to be_valid
+  end
+
+  it "validates for the presence of a password_confirmation virtual attribute" do
+    user_no_password = FactoryGirl.build_stubbed(:user, password_confirmation: " ")
+    expect(user_no_password).not_to be_valid
   end
 
 end
