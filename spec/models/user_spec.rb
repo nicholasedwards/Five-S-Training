@@ -33,4 +33,15 @@ RSpec.describe User do
     expect(user_valid_email).to be_valid
   end
 
+  it "validates for a unique email" do
+    # The uniqueness validation works by querying the database to check for an existing record with 
+    # the same value in an attribute.
+    # So, we first have to persist an ActiveRecord object to the database so that a non-unique
+    # record can be checked against the records in the database.
+    # This method is slow, but I think it is necessary!
+    user = User.create(email: "valid@example.com", password_digest: "IjZAgcfl7p92ldGxad68LJZdL17lhWy")
+    user_duplicate = user.dup
+    expect(user_duplicate).not_to be_valid
+  end
+
 end
