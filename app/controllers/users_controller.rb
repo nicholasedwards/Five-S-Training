@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   	  flash[:success] = "You have successfully signed up!"
       redirect_to lessons_path
   	else
-  	  flash[:danger] = "There was an error!"
+      session[:errors] = @user.errors.full_messages
       redirect_to new_user_path
   	end
   end

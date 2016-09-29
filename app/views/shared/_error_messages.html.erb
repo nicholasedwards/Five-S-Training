@@ -1,0 +1,15 @@
+<% if session[:errors] %>
+  <div id="error_explanation">
+  	<div class="alert alert-danger">
+  	  <p>
+  	  	The form contains <%= pluralize(session[:errors].count, "error") %>!
+  	  </p>
+      <% session[:errors].each do |message| %>
+        <ul>
+          <li><%= message %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+  <% session[:errors] = nil %>
+<% end %>
