@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
   	if @user.save
   	  flash[:success] = "You have successfully signed up!"
-      redirect_to @user
+      redirect_to lessons_path
   	else
   	  flash[:danger] = "There was an error!"
       redirect_to new_user_path
