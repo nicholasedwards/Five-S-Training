@@ -10,5 +10,12 @@ body {
 }
 
 ul {
-    list-style-position: inside;
+  list-style-position: inside;
+}
+
+/* forms */
+
+input, textarea {
+  width: 100%;
+  margin-bottom: 10px;
 }
