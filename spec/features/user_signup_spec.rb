@@ -14,7 +14,6 @@ RSpec.describe 'User Signup' do
     fill_in "Password", with: " "
     fill_in "Password Confirmation", with: " "
 
-    # I am NOT SURE about this, but here is my current understanding of a possible problem.
     # Capybara's click_on method will submit an asynchronous request, which would introduce a problem
     # if we were to test for a change in User.count like this:
     # expect( click_on "Sign up!" ).to change{User.count}.by(0)
@@ -33,7 +32,7 @@ RSpec.describe 'User Signup' do
     expect(page).to have_current_path(new_user_path)
   end
 
-  it "creates a new user and renders that user's show page after submission of valid signup information" do
+  it "creates a new user and renders the lessons index page after submission of valid signup information" do
   	visit(new_user_path)
   	fill_in "Email", with: "valid@example.com"
   	fill_in "Password", with: "f00bAr!"
@@ -43,7 +42,7 @@ RSpec.describe 'User Signup' do
     expect(page).to have_content("successful")
     user_count_after_submission = User.count
     expect(user_count_before_submission).not_to eql(user_count_after_submission)
-    expect(page).to have_current_path(user_path(User.last))	
+    expect(page).to have_current_path(lessons_path)	
   end
 	
 end
