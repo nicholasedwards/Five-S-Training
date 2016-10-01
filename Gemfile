@@ -55,3 +55,10 @@ group :development, :test do
 
 end
 
+group :production do
+
+  # Use Puma webserver in production
+  gem 'puma'
+
+end
+
