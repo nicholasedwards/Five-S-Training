@@ -5,11 +5,11 @@ RSpec.describe 'User Signup' do
   it "redirects to the user signup page from the Home page" do
   	visit(root_path)
   	click_on('Sign up!')
-    expect(page).to have_current_path(new_user_path)
+    expect(page).to have_current_path(signup_path)
   end
 
   it "re-renders the signup page after submission of invalid signup information" do
-    visit(new_user_path)
+    visit(signup_path)
     fill_in "Email", with: " "
     fill_in "Password", with: " "
     fill_in "Password Confirmation", with: " "
@@ -29,11 +29,11 @@ RSpec.describe 'User Signup' do
     expect(page).to have_content("error")
     user_count_after_submission = User.count
     expect(user_count_before_submission).to eql(user_count_after_submission)
-    expect(page).to have_current_path(new_user_path)
+    expect(page).to have_current_path(signup_path)
   end
 
   it "creates a new user and renders the lessons index page after submission of valid signup information" do
-  	visit(new_user_path)
+  	visit(signup_path)
   	fill_in "Email", with: "valid@example.com"
   	fill_in "Password", with: "f00bAr!"
     fill_in "Password Confirmation", with: "f00bAr!" 
