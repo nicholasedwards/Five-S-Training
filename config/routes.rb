@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
 
-  get 'sessions/new'
-
-  get 'lessons/index'
-
   root 'static_pages#home'
+
   get 'about' => 'static_pages#about' 
 
-  resources :users, only: [:new, :create] 
-  resources :lessons, only: [:index]
-  resources :sessions, only: [:new]
+  get 'signup' => 'users#new'
+
+  get 'login' => 'sessions#new'
+
+  get 'lessons' => 'lessons#index'
+
+  resources :users, only: [:create] 
 
 end

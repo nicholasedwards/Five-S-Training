@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       redirect_to lessons_path
   	else
       session[:errors] = @user.errors.full_messages
-      redirect_to new_user_path
+      redirect_to signup_path
   	end
   end
 
