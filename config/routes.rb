@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'sessions/new'
+
   get 'lessons/index'
 
   root 'static_pages#home'
@@ -7,5 +9,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create] 
   resources :lessons, only: [:index]
+  resources :sessions, only: [:new]
 
 end
