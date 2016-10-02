@@ -1,12 +1,13 @@
 class SessionsController < ApplicationController
+include SessionsHelper
 
   def new
   end
 
   def create
-  	user = User.find_by(email: params[:session][:email])
-  	  if user && user.authenticate(params[:session][:password])
-  	  	session[:user_id] = user.id
+  	user = find_user_from_login_attempt
+  	  if user_exists_and_has_correct_credentials?(user)
+  	  	log_in(user)
   	  	flash[:success] = "Login was successful!"
         redirect_to lessons_path
       else
