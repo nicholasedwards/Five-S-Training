@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
-
-  def show
-    @user = User.find(params[:id])
-  end
+include UsersHelper
 
   def new
   	@user = User.new
@@ -14,7 +11,7 @@ class UsersController < ApplicationController
   	  flash[:success] = "You have successfully signed up!"
       redirect_to lessons_path
   	else
-      session[:errors] = @user.errors.full_messages
+      store_errors_in_session_hash
       redirect_to signup_path
   	end
   end
