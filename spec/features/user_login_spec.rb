@@ -26,5 +26,21 @@ RSpec.describe 'User Login' do
     expect(page).to have_content("successful")
   	expect(page).to have_current_path(lessons_path)
   end
+
+  it "displays a login link and no logout link for users who are not logged in" do
+    visit root_path
+    expect(page).to have_selector('#login')
+    expect(page).not_to have_selector('#logout')
+  end
+
+  it "displays a logout link and no login link for users who are logged in" do
+    valid_user = FactoryGirl.create(:user)
+    visit login_path
+    fill_in "Email", with: valid_user.email
+    fill_in "Password", with: valid_user.password
+    click_on "Log in!"
+    expect(page).to have_selector('#logout')
+    expect(page).not_to have_selector('#login')
+  end
 	
 end
