@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'login' => 'sessions#new'
 
+  post 'login' => 'sessions#create'
+
   get 'lessons' => 'lessons#index'
 
   resources :users, only: [:create] 
