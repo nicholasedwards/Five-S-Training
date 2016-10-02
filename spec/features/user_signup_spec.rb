@@ -9,10 +9,7 @@ RSpec.describe 'User Signup' do
   end
 
   it "re-renders the signup page after submission of invalid signup information" do
-    visit(signup_path)
-    fill_in "Email", with: " "
-    fill_in "Password", with: " "
-    fill_in "Password Confirmation", with: " "
+    sign_up_as(" ", " ", " ")
 
     # Capybara's click_on method will submit an asynchronous request, which would introduce a problem
     # if we were to test for a change in User.count like this:
@@ -33,10 +30,7 @@ RSpec.describe 'User Signup' do
   end
 
   it "creates a new user and renders the lessons index page after submission of valid signup information" do
-  	visit(signup_path)
-  	fill_in "Email", with: "valid@example.com"
-  	fill_in "Password", with: "f00bAr!"
-    fill_in "Password Confirmation", with: "f00bAr!" 
+    sign_up_as("valid@example.com", "va1id_P@ssw0rd", "va1id_P@ssw0rd")
     user_count_before_submission = User.count
     click_on "Sign up!"
     expect(page).to have_content("successful")

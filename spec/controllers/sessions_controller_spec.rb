@@ -1,9 +1,4 @@
 require 'rails_helper'
-require 'helpers/spec_helper_methods'
-
-RSpec.configure do |c|
-  c.include Helpers
-end
 
 RSpec.describe SessionsController, type: :controller do
 
