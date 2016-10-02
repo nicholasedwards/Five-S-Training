@@ -17,7 +17,7 @@ RSpec.describe 'User Login' do
     expect(page).to have_current_path(login_path)
   end
 
-  it "logs in a user and renders the lessons index page after submission of valid login information" do
+  it "renders the lessons index page after submission of valid login information" do
     valid_user = FactoryGirl.create(:user)
   	visit login_path
   	fill_in "Email", with: valid_user.email

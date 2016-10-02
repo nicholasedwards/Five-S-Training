@@ -1,4 +1,9 @@
 require 'rails_helper'
+require 'helpers/spec_helper_methods'
+
+RSpec.configure do |c|
+  c.include Helpers
+end
 
 RSpec.describe SessionsController, type: :controller do
 
@@ -7,6 +12,21 @@ RSpec.describe SessionsController, type: :controller do
       get :new
       expect(response).to have_http_status(:success)
     end
+  end
+
+  describe "Login" do
+
+    it "does not log the user in when invalid login information is provided" do
+  	  post :create, session: {email: " ", password: " "}
+      expect(is_logged_in?).to be_falsy
+    end
+
+    it "logs the user in when valid login information is provided" do
+      valid_user = FactoryGirl.create(:user)
+  	  post :create, session: {email: valid_user.email, password: valid_user.password}
+      expect(is_logged_in?).to be_truthy
+    end
+
   end
 
 end
