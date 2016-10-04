@@ -9,7 +9,7 @@ RSpec.describe SessionsController, type: :controller do
     end
   end
 
-  describe "Login" do
+  describe "Authentication" do
 
     it "does not log the user in when invalid login information is provided" do
   	  post :create, session: {email: " ", password: " "}
@@ -20,6 +20,14 @@ RSpec.describe SessionsController, type: :controller do
       valid_user = FactoryGirl.create(:user)
   	  post :create, session: {email: valid_user.email, password: valid_user.password}
       expect(is_logged_in?).to be_truthy
+    end
+
+    it "logs the user out" do
+      valid_user = FactoryGirl.create(:user)
+      post :create, session: {email: valid_user.email, password: valid_user.password}
+      expect(is_logged_in?).to be_truthy
+      delete :destroy
+      expect(is_logged_in?).to be_falsy
     end
 
   end
