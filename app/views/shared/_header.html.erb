@@ -1,10 +1,10 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
-	<div class= "container">
+    <div class= "container">
       <ul class="nav navbar-nav navbar-right">
         <li id="home"><%= link_to "Home", root_path %></li>
         <li id="about"><%= link_to "About", about_path %></li>
         <% if logged_in? %>
-        <li id="logout">Logout</li>         
+        <li id="logout"><%= link_to "Logout", logout_path, method: :delete %></li>         
         <% else %>
         <li id="login"><%= link_to "Login", login_path %></li>       
         <% end %> 
