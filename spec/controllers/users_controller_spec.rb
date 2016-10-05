@@ -21,4 +21,16 @@ RSpec.describe UsersController, type: :controller do
 
   end
 
+  describe "User Updating" do
+
+    it "requires the user to be logged in in order to send a PATCH or PUT request to users#update" do
+      expect(logged_in?).to be_falsy
+      patch :update, { id: 1 , user: { email: "updated_email_attempt@gmail.com", password: "updated_password_attempt", password_confirmation: "updated_password_attempt" } } 
+      expect(response).to redirect_to(login_path)    
+      put :update, { id: 1 , user: { email: "updated_email_attempt@gmail.com", password: "updated_password_attempt", password_confirmation: "updated_password_attempt" } }
+      expect(response).to redirect_to(login_path)   
+    end
+
+  end
+
 end
