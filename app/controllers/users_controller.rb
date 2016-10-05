@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 include UsersHelper
 include SessionsHelper
 
-before_action :logged_in_user, only: [:edit]
+before_action :logged_in_user, only: [:edit, :update]
 
   def new
   	@user = User.new
@@ -21,6 +21,10 @@ before_action :logged_in_user, only: [:edit]
   end
 
   def edit
+  end
+
+  def update
+    @user = User.find(params[:id])
   end
 
   private
