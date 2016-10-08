@@ -22,4 +22,15 @@ RSpec.describe "User Editing" do
   	expect(page).to have_current_path(lessons_path)
   end
 
+  it "displays an error message in the case of an unsuccessful profile update" do
+  	log_in_with(user.email, user.password)
+  	click_on('Update Profile')
+  	fill_in 'Email', with: " "
+  	fill_in 'Password', with: " "
+  	fill_in 'Password Confirmation', with: " "
+  	click_on('Update Profile!')
+  	expect(page).to have_content("error")
+  	expect(page).to have_current_path(edit_user_path(user))
+  end
+
 end
