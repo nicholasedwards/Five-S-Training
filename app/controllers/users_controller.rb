@@ -26,7 +26,7 @@ before_action :logged_in_user, only: [:edit, :update]
 
   def update
     @user = User.find(params[:id])
-    if @user.update_attributes(email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
+    if @user.update_attributes(user_params)
       flash[:success] = "You have successfully updated your profile!"
       redirect_to lessons_path
     else
