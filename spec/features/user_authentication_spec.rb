@@ -10,19 +10,19 @@ RSpec.describe 'User Authentication' do
     expect(page).to have_current_path(signup_path)
   end
   
-  it "re-renders the login page after submission of invalid login information" do
+  it "re-renders the login page after submission of invalid authentication credentials" do
     log_in_with(" ", " ")
     expect(page).to have_content("Invalid")
     expect(page).to have_current_path(login_path)
   end
 
-  it "renders the lessons index page after submission of valid login information" do
+  it "renders the lessons index page after submission of valid authentication credentials" do
     log_in_with(valid_user.email, valid_user.password)
     expect(page).to have_content("successful")
     expect(page).to have_current_path(lessons_path)
   end
 
-  it "displays a login link for users who are not logged in, and a logout link for users who are logged in" do
+  it "displays a login link for users who are not authenticated, and a logout link for users who are authenticated" do
     visit root_path
     expect(page).to have_link('Login', href: '/login')
     expect(page).not_to have_link('Logout', href: '/logout')
