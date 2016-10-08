@@ -29,6 +29,9 @@ before_action :logged_in_user, only: [:edit, :update]
     if @user.update_attributes(email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password_confirmation])
       flash[:success] = "You have successfully updated your profile!"
       redirect_to lessons_path
+    else
+      store_errors_in_session_hash
+      redirect_to edit_user_path(@user)
     end
   end
 
