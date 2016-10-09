@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 include UsersHelper
 include SessionsHelper
 
-before_action :logged_in_user, only: [:edit, :update]
+before_action :logged_in_user, only: [:edit, :update, :destroy]
 
   def new
   	@user = User.new
@@ -33,6 +33,9 @@ before_action :logged_in_user, only: [:edit, :update]
       store_errors_in_session_hash
       redirect_to edit_user_path(@user)
     end
+  end
+
+  def destroy
   end
 
   private

@@ -14,6 +14,6 @@ Rails.application.routes.draw do
 
   get 'lessons' => 'lessons#index'
 
-  resources :users, only: [:create, :edit, :update] 
+  resources :users, only: [:create, :edit, :update, :destroy] 
 
 end
