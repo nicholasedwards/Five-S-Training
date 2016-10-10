@@ -10,6 +10,7 @@
           </a>
           <ul class="dropdown-menu">
             <li id="edit"><%= link_to "Update Profile", edit_user_path(current_user) %></li>
+            <li id="delete"><%= link_to "Delete Profile", confirm_deletion_path %></li>
             <li id="logout"><%= link_to "Logout", logout_path, method: :delete %></li> 
           </ul>
         </li>        

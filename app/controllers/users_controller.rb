@@ -35,7 +35,16 @@ before_action :logged_in_user, only: [:edit, :update, :destroy]
     end
   end
 
+  def confirm_deletion
+    @user = current_user
+  end
+
   def destroy
+    user_id = session[:user_id]
+    log_out
+    User.find(user_id).destroy
+    flash[:success] = "Your account has been deleted!"
+    redirect_to root_path
   end
 
   private

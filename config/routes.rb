@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
 
+  get 'confirm_deletion' => 'users#confirm_deletion'
+
   get 'login' => 'sessions#new'
 
   post 'login' => 'sessions#create'
