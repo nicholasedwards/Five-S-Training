@@ -8,7 +8,7 @@ RSpec.describe User do
     expect(user).to respond_to(:password_digest)
   end
 
-  it "validates presence of email attribute" do
+  it "validates for the presence of an email attribute" do
   	user_no_email = FactoryGirl.build_stubbed(:user, email: nil)
   	expect(user_no_email).not_to be_valid
 

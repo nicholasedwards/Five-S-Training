@@ -23,7 +23,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe "User Updating" do
 
-    it "does not allow an unauthenticated user to send a PATCH or PUT request to users#update" do
+    it "redirects when an unauthenticated client sends a PATCH or PUT request to users#update" do
       expect(logged_in?).to be_falsy
       patch :update, { id: 1 , user: { email: "updated_email_attempt@gmail.com", password: "updated_password_attempt", password_confirmation: "updated_password_attempt" } } 
       expect(response).to redirect_to(login_path)    
@@ -35,7 +35,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe "User Deleting" do
 
-    it "does not allow an unauthenticated user to send a DELETE request to users#destroy" do
+    it "redirects when an unauthenticated client sends a DELETE request to users#destroy" do
       expect(logged_in?).to be_falsy
       delete :destroy, { id: 1 } 
       expect(response).to redirect_to(login_path) 
