@@ -35,7 +35,7 @@ RSpec.describe 'User Signup' do
     click_on "Sign up!"
     expect(page).to have_content("successful")
     user_count_after_signup = User.count
-    expect(user_count_before_signup).not_to eql(user_count_after_signup)
+    expect(user_count_after_signup).to eql(user_count_before_signup + 1)
     expect(page).to have_current_path(lessons_path)	
   end
 	
