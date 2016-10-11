@@ -21,21 +21,21 @@ RSpec.describe 'User Signup' do
     # received a response by the time the next RSpec or Capybara method is called, so an appropriate time to check 
     # if User.count has changed would be after the method that follows the click_on method.
 
-    user_count_before_submission = User.count
+    user_count_before_signup = User.count
     click_on "Sign up!"
     expect(page).to have_content("error")
-    user_count_after_submission = User.count
-    expect(user_count_before_submission).to eql(user_count_after_submission)
+    user_count_after_signup = User.count
+    expect(user_count_before_signup).to eql(user_count_after_signup)
     expect(page).to have_current_path(signup_path)
   end
 
   it "creates a new user and renders the lessons index page after submission of valid signup information" do
     sign_up_as("valid@example.com", "va1id_P@ssw0rd", "va1id_P@ssw0rd")
-    user_count_before_submission = User.count
+    user_count_before_signup = User.count
     click_on "Sign up!"
     expect(page).to have_content("successful")
-    user_count_after_submission = User.count
-    expect(user_count_before_submission).not_to eql(user_count_after_submission)
+    user_count_after_signup = User.count
+    expect(user_count_before_signup).not_to eql(user_count_after_signup)
     expect(page).to have_current_path(lessons_path)	
   end
 	
