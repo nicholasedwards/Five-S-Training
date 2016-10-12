@@ -3,6 +3,7 @@ include UsersHelper
 include SessionsHelper
 
 before_action :logged_in_user, only: [:edit, :update, :destroy]
+before_action :correct_user, only: [:edit]
 
   def new
   	@user = User.new
@@ -53,6 +54,11 @@ before_action :logged_in_user, only: [:edit, :update, :destroy]
 
   def logged_in_user
     redirect_to login_path if !logged_in?
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to root_path unless @user == current_user
   end
 
 end
