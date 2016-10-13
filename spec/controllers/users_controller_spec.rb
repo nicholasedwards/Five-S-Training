@@ -31,6 +31,23 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to redirect_to(login_path)   
     end
 
+    it "redirects when an authenticated user sends a PATCH or PUT request to users#update for a different user" do
+
+    # Create an innocent user who only wants to use the application in peace!
+      innocent_user = FactoryGirl.create(:user)   
+
+    # Create a malicious user, and log in as the malicious user
+      malicious_user = FactoryGirl.create(:user)
+      log_in(malicious_user)   
+
+    # Attempt to update the first user's profile.
+      patch :update, { id: innocent_user.id , user: { email: "updated_email_attempt@gmail.com", password: "updated_password_attempt", password_confirmation: "updated_password_attempt" } } 
+      expect(response).to redirect_to(root_path)    
+      put :update, { id: innocent_user.id , user: { email: "updated_email_attempt@gmail.com", password: "updated_password_attempt", password_confirmation: "updated_password_attempt" } }
+      expect(response).to redirect_to(root_path) 
+
+    end  
+
   end
 
   describe "User Deleting" do
