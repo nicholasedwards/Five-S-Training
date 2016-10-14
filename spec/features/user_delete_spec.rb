@@ -16,4 +16,8 @@ RSpec.describe "User Deleting" do
     expect(page).to have_current_path(root_path)
   end
 
+  # Controller specs are used to cover the following cases:
+  # -an unauthenticated user attempts to delete a user
+  # -an authenticated user attempts to delete a different user
+
 end
