@@ -58,6 +58,27 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to redirect_to(login_path) 
     end
 
+    it "redirects and does not delete a user when an authenticated user sends a DELETE request to users#destroy for a different user" do
+
+    # Create an innocent user who only wants to use the application in peace!
+      innocent_user = FactoryGirl.create(:user)   
+
+    # Create a malicious user, and log in as the malicious user
+      malicious_user = FactoryGirl.create(:user)
+      log_in(malicious_user)   
+
+      user_count_before_deletion_attempt = User.count
+
+    # Attempt to update the first user's profile.
+      delete :destroy, { id: innocent_user.id  } 
+      expect(response).to redirect_to(root_path)   
+
+      user_count_after_deletion_attempt = User.count 
+
+      expect(user_count_after_deletion_attempt).to eql(user_count_before_deletion_attempt)
+
+    end      
+
   end
 
 end
