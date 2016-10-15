@@ -12,7 +12,7 @@ before_action :correct_user, only: [:edit, :update, :destroy]
   def create
     @user = User.new(user_params)
   	if @user.save
-  	  flash[:success] = "You have successfully signed up!"
+  	  flash[:success] = "You have successfully signed up! When you read one of the lessons below, your progress will be recorded. Please click on Lesson 1 below to get started!"
       log_in(@user)
       redirect_to lessons_path
   	else
