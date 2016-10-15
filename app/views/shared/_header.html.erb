@@ -1,7 +1,11 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
     <div class= "container">
       <ul class="nav navbar-nav navbar-right">
+        <% if logged_in? %>
+        <li id="home"><%= link_to "Home", lessons_path %></li>
+        <% else %>
         <li id="home"><%= link_to "Home", root_path %></li>
+        <% end %>
         <li id="about"><%= link_to "About", about_path %></li>
         <% if logged_in? %>
         <li class="dropdown">
