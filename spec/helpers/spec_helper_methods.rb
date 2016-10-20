@@ -5,6 +5,7 @@ module Helpers
     fill_in "Email", with: email
     fill_in "Password", with: password
     fill_in "Password Confirmation", with: password_confirmation
+    click_on "Sign up!"
   end
 
   def is_logged_in?

@@ -9,6 +9,7 @@ RSpec.describe 'User Signup' do
   end
 
   it "re-renders the signup page after submission of invalid signup information" do
+    user_count_before_signup = User.count   
     sign_up_as(" ", " ", " ")
 
     # Capybara's click_on method will submit an asynchronous request, which would introduce a problem
@@ -21,8 +22,6 @@ RSpec.describe 'User Signup' do
     # received a response by the time the next RSpec or Capybara method is called, so an appropriate time to check 
     # if User.count has changed would be after the method that follows the click_on method.
 
-    user_count_before_signup = User.count
-    click_on "Sign up!"
     expect(page).to have_content("error")
     user_count_after_signup = User.count
     expect(user_count_before_signup).to eql(user_count_after_signup)
@@ -30,9 +29,8 @@ RSpec.describe 'User Signup' do
   end
 
   it "creates a new user and renders the lessons index page after submission of valid signup information" do
-    sign_up_as("valid@example.com", "va1id_P@ssw0rd", "va1id_P@ssw0rd")
     user_count_before_signup = User.count
-    click_on "Sign up!"
+    sign_up_as("valid@example.com", "va1id_P@ssw0rd", "va1id_P@ssw0rd")
     expect(page).to have_content("successful")
     user_count_after_signup = User.count
     expect(user_count_after_signup).to eql(user_count_before_signup + 1)
