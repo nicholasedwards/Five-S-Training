@@ -1,2 +1,12 @@
-<h1>Lessons#index</h1>
-<p>Find me in app/views/lessons/index.html.erb</p>
+<% @lessons.each do |lesson| %>
+  <% if lesson == Lesson.first %>
+    <div id="next-lesson">
+  	  <div><%= lesson.title %></div>
+  	  <div>Click to start this lesson!</div>
+    </div>
+  <% else %>
+    <div>
+  	  <%= lesson.title %>
+    </div>
+  <% end %>
+<% end %>
