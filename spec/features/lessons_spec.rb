@@ -19,4 +19,13 @@ RSpec.describe 'Lessons' do
     expect(page).to have_selector("#next-lesson", text: "Click to start this lesson!")
   end
 
+  it 'shows both complete and incomplete lessons' do
+    log_in_with(user.email, user.password)
+    user.lesson_completions.create(lesson_id: lesson_1.id)
+    click_on "Home"
+    expect(page).to have_selector(".completed-lesson")
+    expect(page).to have_selector("#next-lesson", text: "Click to start this lesson!")
+    expect(page).to have_selector(".incomplete-lesson")
+  end  
+
 end
