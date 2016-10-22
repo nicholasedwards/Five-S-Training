@@ -1,12 +1,17 @@
-<% @lessons.each do |lesson| %>
-  <% if lesson == Lesson.first %>
-    <div id="next-lesson">
-  	  <div><%= lesson.title %></div>
-  	  <div>Click to start this lesson!</div>
+<% @lessons.each_with_index do |lesson, i| %>
+  <% if lesson.users_who_completed_this_lesson.include? @current_user %>
+    <div class="completed-lesson">
+      <%= lesson.title %> Lesson completed
     </div>
   <% else %>
-    <div>
-  	  <%= lesson.title %>
-    </div>
+    <% if i == 1 %>
+      <div class="incomplete-lesson" id="next-lesson">
+  	    <%= lesson.title %> Click to start this lesson!
+      </div>
+    <% else %>
+      <div class="incomplete-lesson">
+        <%= lesson.title %> Lesson not yet completed
+      </div>
+    <% end %>
   <% end %>
 <% end %>
