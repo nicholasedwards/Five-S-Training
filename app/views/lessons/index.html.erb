@@ -4,7 +4,7 @@
       <%= lesson.title %> Lesson completed
     </div>
   <% else %>
-    <% if i == 1 %>
+    <% if i == @current_user.completed_lessons.count %>
       <div class="incomplete-lesson" id="next-lesson">
   	    <%= lesson.title %> Click to start this lesson!
       </div>

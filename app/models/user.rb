@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   validates :password, presence: true, allow_nil: true
   has_secure_password
   has_many :lesson_completions
+  has_many :completed_lessons, through: :lesson_completions, source: :lesson
 end

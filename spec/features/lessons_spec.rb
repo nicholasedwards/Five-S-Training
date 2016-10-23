@@ -26,7 +26,7 @@ RSpec.describe 'Lessons' do
     click_on "Home"
 
     expect(page).to have_selector(".completed-lesson", text: "Lesson completed")
-    expect("Lesson Completed").to appear_in_page_before("Click to start this lesson!")
+    expect("Lesson completed").to appear_in_page_before("Click to start this lesson!")
 
     expect(page).to have_selector("#next-lesson", text: "Click to start this lesson!")
     expect("Click to start this lesson!").to appear_in_page_before("Lesson not yet completed")
