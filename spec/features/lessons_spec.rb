@@ -17,8 +17,9 @@ RSpec.describe 'Lessons' do
   	sign_up_as("valid@example.com", "va1id_P@ssw0rd", "va1id_P@ssw0rd")
     expect(page).to have_content(lesson_1.title)
     expect(page).to have_content(lesson_2.title)
+    expect(page).to have_title("Home")
     expect(page).to have_selector("#next-lesson", text: "Click to start this lesson!")
-  end
+  end  
 
   it 'shows complete lessons, followed by the next lesson, followed by incomplete lessons' do
     log_in_with(user.email, user.password)
