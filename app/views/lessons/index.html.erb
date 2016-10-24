@@ -1,17 +1,15 @@
 <% @lessons.each_with_index do |lesson, i| %>
-  <% if lesson.users_who_completed_this_lesson.include? @current_user %>
+  <% if completed_lesson?(lesson) %>
     <div class="completed-lesson">
       <%= lesson.title %> Lesson completed
     </div>
+  <% elsif next_lesson?(i) %>
+    <div class="incomplete-lesson" id="next-lesson">
+      <%= lesson.title %> Click to start this lesson!
+    </div>
   <% else %>
-    <% if i == @current_user.completed_lessons.count %>
-      <div class="incomplete-lesson" id="next-lesson">
-  	    <%= lesson.title %> Click to start this lesson!
-      </div>
-    <% else %>
-      <div class="incomplete-lesson">
-        <%= lesson.title %> Lesson not yet completed
-      </div>
-    <% end %>
+    <div class="incomplete-lesson">
+      <%= lesson.title %> Lesson not yet completed
+    </div>
   <% end %>
 <% end %>
