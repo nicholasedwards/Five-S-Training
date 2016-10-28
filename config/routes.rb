@@ -14,8 +14,10 @@ Rails.application.routes.draw do
 
   delete 'logout' => 'sessions#destroy'
 
-  get 'lessons' => 'lessons#index'
-
   resources :users, only: [:create, :edit, :update, :destroy] 
+
+  resources :lessons, only: [:show, :index]
+
+  resources :lesson_completions, only: [:create]
 
 end
