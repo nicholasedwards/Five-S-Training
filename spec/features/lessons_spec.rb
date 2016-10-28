@@ -46,4 +46,10 @@ RSpec.describe 'Lessons' do
     expect(user.completed_lessons).to include(lesson_1)
   end
 
+  it "displays lesson content" do
+    log_in_with(user.email, user.password)
+    click_on "#{lesson_1.title}"
+    expect(page).to have_content(lesson_1.content)
+  end
+
 end
