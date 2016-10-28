@@ -1,3 +1,5 @@
+<%= @lesson.content.html_safe %>
+
 <%= form_for(current_user.lesson_completions.build) do |f| %>
 <%= hidden_field_tag :lesson_id, @lesson.id %>
 <%= f.submit "I have read this lesson and I understand it!", class: "btn btn-primary" %>
