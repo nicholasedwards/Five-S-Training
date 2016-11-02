@@ -8,6 +8,7 @@ include SessionsHelper
 
   def show
   	@lesson = Lesson.find(params[:id])
+  	@current_user = current_user
   end
 
 end

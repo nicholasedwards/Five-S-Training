@@ -4,10 +4,14 @@
   <div class="col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8">
     <%= @lesson.content.html_safe %>
   </div>
-  <div class="col-md-offset-4 col-lg-offset-4 col-md-4 col-lg-4">
+  <% if completed_lesson?(@lesson) %>
+    <%= link_to "Go back to home page", lessons_path %>  
+  <% else %>
+    <div class="col-md-offset-4 col-lg-offset-4 col-md-4 col-lg-4">
 	  <%= form_for(current_user.lesson_completions.build) do |f| %>
 	  <%= hidden_field_tag :lesson_id, @lesson.id %>
 	  <%= f.submit "I have read this lesson and I understand it!", class: "btn btn-primary" %>
 	  <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
