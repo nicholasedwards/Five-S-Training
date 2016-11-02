@@ -5,7 +5,9 @@
     <%= @lesson.content.html_safe %>
   </div>
   <% if completed_lesson?(@lesson) %>
-    <%= link_to "Go back to home page", lessons_path %>  
+    <div class="col-md-offset-4 col-lg-offset-4 col-md-4 col-lg-4 center">
+      <%= link_to "Go back to home page", lessons_path, class: "btn btn-primary" %>  
+    </div>
   <% else %>
     <div class="col-md-offset-4 col-lg-offset-4 col-md-4 col-lg-4">
 	  <%= form_for(current_user.lesson_completions.build) do |f| %>
