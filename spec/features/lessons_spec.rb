@@ -53,4 +53,13 @@ RSpec.describe 'Lessons' do
     expect(page).to have_title(lesson_1.title)
   end
 
+  it "displays a link to the lessons index from a lesson that has already been completed" do
+    log_in_with(user.email, user.password)
+    click_on "#{lesson_1.title}"
+    click_on "I have read this lesson and I understand it!"
+    click_on "#{lesson_1.title}"
+    click_on "Go back to home page"
+    expect(page).to have_current_path(lessons_path)  
+  end
+
 end
