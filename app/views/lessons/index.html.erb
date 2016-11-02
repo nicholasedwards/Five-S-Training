@@ -4,19 +4,19 @@
   <div class="row">
     <div class="col-md-offset-3 col-lg-offset-3 col-md-6 col-lg-6 center">
       <% if completed_lesson?(lesson) %>
-        <div class="completed-lesson btn btn-primary lesson-container">
-          <%= link_to lesson_path(lesson) do %>          
-          <div class="lesson-title"><%= lesson.title %></div> 
-          <div class="lesson-note">Lesson completed</div>
-          <% end %>
-        </div>
+        <%= link_to lesson_path(lesson) do %>       
+          <div class="completed-lesson btn btn-primary lesson-container">         
+            <div class="lesson-title"><%= lesson.title %></div> 
+            <div class="lesson-note">Lesson completed</div>
+          </div>
+        <% end %>        
       <% elsif next_lesson?(i) %>
-        <div class="incomplete-lesson btn btn-primary lesson-container" id="next-lesson">
-          <%= link_to lesson_path(lesson) do %>            
-          <div class="lesson-title"><%= lesson.title %></div>
-          <div class="lesson-note">Click to start this lesson!</div>
-          <% end %>
-        </div>
+        <%= link_to lesson_path(lesson) do %>          
+          <div class="incomplete-lesson btn btn-primary lesson-container" id="next-lesson">        
+            <div class="lesson-title"><%= lesson.title %></div>
+            <div class="lesson-note">Click to start this lesson!</div>
+          </div>
+        <% end %>
       <% else %>
         <div class="incomplete-lesson btn btn-primary lesson-container">
           <div class="lesson-title"><%= lesson.title %></div> 
