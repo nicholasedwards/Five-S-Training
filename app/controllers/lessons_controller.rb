@@ -2,7 +2,7 @@ class LessonsController < ApplicationController
 include SessionsHelper
 
   def index
-    @lessons = Lesson.all
+    @lessons = Lesson.all.order(:id)
     @current_user = current_user
   end
 

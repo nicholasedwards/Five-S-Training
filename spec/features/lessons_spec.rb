@@ -62,4 +62,16 @@ RSpec.describe 'Lessons' do
     expect(page).to have_current_path(lessons_path)  
   end
 
+  it 'orders the lessons index by id, even when a lesson has been updated' do
+    # I found a bug in production where the lessons index would show lessons sorted by the updated_at attribute, instead of by id.
+    # However, as of now I have been unsuccessful at replicating this issue in the test environment, where the lessons index collection is reliably sorted by id.
+    # This test has been green all along, both before and after a minor change to the lessons controller code, but it still should prevent regressions. 
+    first_lesson = Lesson.create(title: "Lesson 1 title", content: "Lesson 1 original content")
+    second_lesson = Lesson.create(title: "Lesson 2 title", content: "Lesson 2 content")
+    first_lesson.content = "Lesson 1 updated content"
+
+    log_in_with(user.email, user.password)
+    expect(first_lesson.title).to appear_in_page_before(second_lesson.title)    
+  end
+
 end
