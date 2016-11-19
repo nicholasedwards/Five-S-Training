@@ -15,4 +15,16 @@ RSpec.describe LessonCompletion do
     end
   end
 	
+  it "destroys associated lesson completions when a user is destroyed" do
+    user.completed_lessons << lesson
+    user.destroy
+    expect(LessonCompletion.count).to eq(0)
+  end
+
+  it "destroys associated lesson completions when a lesson is destroyed" do
+    lesson.users_who_completed_this_lesson << user
+    lesson.destroy
+    expect(LessonCompletion.count).to eq(0)
+  end
+
 end
