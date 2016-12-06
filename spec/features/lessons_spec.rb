@@ -74,4 +74,13 @@ RSpec.describe 'Lessons' do
     expect(first_lesson.title).to appear_in_page_before(second_lesson.title)    
   end
 
+  it 'displays a special flash message when all lessons have been completed' do
+    log_in_with(user.email, user.password) 
+      Lesson.all.each do |lesson|  
+        click_on "#{lesson.title}"
+        click_on "I have read this lesson and I understand it!"   
+      end 
+    expect(page).to have_content("You have completed every lesson.")     
+  end  
+
 end
