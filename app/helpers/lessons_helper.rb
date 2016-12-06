@@ -5,7 +5,7 @@ module LessonsHelper
   end
 
   def all_lessons_completed?
-  	Lesson.all.all? {|lesson_to_check_for_completeness| completed_lesson?(lesson_to_check_for_completeness)}
+  	Lesson.all.all? {|lesson| completed_lesson?(lesson)}
   end
 
   def next_lesson?(i)
