@@ -16,13 +16,6 @@ ActiveRecord::Schema.define(version: 20161022205920) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "completed_lessons", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "lesson_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "lesson_completions", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "lesson_id"
