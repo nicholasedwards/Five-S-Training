@@ -1,7 +1,7 @@
 <% provide(:title, "#{@lesson.title}") %>
 
 <div class="row">
-  <div class="col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8">
+  <div class="col-sm-12 col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8">
     <%= @lesson.content.html_safe %>
   </div>
   <% if completed_lesson?(@lesson) %>

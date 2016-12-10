@@ -2,7 +2,7 @@
 
 <% @lessons.each_with_index do |lesson, i| %>
   <div class="row">
-    <div class="col-md-offset-3 col-lg-offset-3 col-md-6 col-lg-6 center">
+    <div class="col-sm-12 col-md-offset-3 col-lg-offset-3 col-md-6 col-lg-6 center">
       <% if completed_lesson?(lesson) %>
         <%= link_to lesson_path(lesson) do %>       
           <div class="completed-lesson btn btn-primary lesson-container">         
