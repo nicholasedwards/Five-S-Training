@@ -13,21 +13,21 @@ RSpec.describe SessionsController, type: :controller do
 
     it "does not log the user in when invalid authentication credentials are provided" do
   	  post :create, session: {email: " ", password: " "}
-      expect(is_logged_in?).to be_falsy
+      expect(logged_in?).to be_falsy
     end
 
     it "logs the user in when valid authentication credentials are provided" do
       valid_user = FactoryGirl.create(:user)
   	  post :create, session: {email: valid_user.email, password: valid_user.password}
-      expect(is_logged_in?).to be_truthy
+      expect(logged_in?).to be_truthy
     end
 
     it "logs the user out when a DELETE request is sent to sessions#destroy" do
       valid_user = FactoryGirl.create(:user)
       post :create, session: {email: valid_user.email, password: valid_user.password}
-      expect(is_logged_in?).to be_truthy
+      expect(logged_in?).to be_truthy
       delete :destroy
-      expect(is_logged_in?).to be_falsy
+      expect(logged_in?).to be_falsy
     end
 
   end

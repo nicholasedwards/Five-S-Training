@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'User Signup' do 
 
+  before(:all) do
+    ActionMailer::Base.deliveries.clear
+  end
+
   it "redirects to the user signup page from the Home page" do
   	visit(root_path)
   	click_on('Sign up!')
@@ -28,13 +32,29 @@ RSpec.describe 'User Signup' do
     expect(page).to have_current_path(signup_path)
   end
 
-  it "creates a new user and renders the lessons index page after submission of valid signup information" do
+  it "signs up a new user and validates the account" do
     user_count_before_signup = User.count
     sign_up_as("valid@example.com", "va1id_P@ssw0rd", "va1id_P@ssw0rd")
-    expect(page).to have_content("successful")
     user_count_after_signup = User.count
     expect(user_count_after_signup).to eql(user_count_before_signup + 1)
+    user = User.last
+    expect(user).not_to be_activated
+    # Try to log in before activation.
+    log_in_with(user.email, user.password)
+    expect(user).not_to be_logged_in
+    # Try to activate an account with a valid email but invalid token
+    visit edit_account_activation_path("invalid token", email: user.email)
+    expect(user).not_to be_logged_in
+    # Try to activate an account with a valid token but invalid email
+    visit edit_account_activation_path(user.activation_token, email: "invalid email")
+    expect(user).not_to be_logged_in
+    # Try to activate an account with a valid token and valid email
+    visit edit_account_activation_path(user.activation_token, email: user.email)
+    user.reload
+    expect(user).to be_activated
+    expect(user).to be_logged_in
     expect(page).to have_current_path(lessons_path)	
+    expect(page).to have_content("successful")    
   end
 	
 end

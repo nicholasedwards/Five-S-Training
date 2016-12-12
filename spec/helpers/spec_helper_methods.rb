@@ -8,7 +8,7 @@ module Helpers
     click_on "Sign up!"
   end
 
-  def is_logged_in?
+  def logged_in?
   	!session[:user_id].nil?
   end
 
