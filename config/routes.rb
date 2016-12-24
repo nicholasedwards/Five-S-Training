@@ -20,4 +20,6 @@ Rails.application.routes.draw do
 
   resources :lesson_completions, only: [:create]
 
+  resources :account_activations, only: [:edit]
+
 end
