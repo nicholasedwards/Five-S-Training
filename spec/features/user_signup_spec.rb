@@ -42,7 +42,7 @@ RSpec.describe 'User Signup' do
     expect(page).to have_current_path(root_path)    
     expect(user).not_to be_activated
     # Try to log in before activation.
-    log_in_with(user.email, user.password)
+    log_in_with("valid@example.com", "va1id_P@ssw0rd")
     expect(page).to have_content("account has not been activated")
     expect(page).to have_current_path(login_path)
     # Try to activate an account with a valid email but invalid token

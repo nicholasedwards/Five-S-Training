@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  attr_accessor :activation_token
   before_create :create_activation_digest  
   VALID_EMAIL_REGEX = /\A[\w+\-\.]+@[\w\-\.]+\.[a-z]+\z/i	
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
@@ -7,6 +6,10 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :lesson_completions, dependent: :destroy
   has_many :completed_lessons, through: :lesson_completions, source: :lesson
+
+  def activate?(activation_token)
+    BCrypt::Password.new(activation_digest).is_password?(activation_token)
+  end
 
   private
 

@@ -14,7 +14,7 @@ RSpec.describe 'Lessons' do
   end
 
   it 'shows a new user several incomplete lessons, one of which is an introductory lesson' do
-  	sign_up_as("valid@example.com", "va1id_P@ssw0rd", "va1id_P@ssw0rd")
+    log_in_with(user.email, user.password)
     expect(page).to have_content(lesson_1.title)
     expect(page).to have_content(lesson_2.title)
     expect(page).to have_title("Home")
