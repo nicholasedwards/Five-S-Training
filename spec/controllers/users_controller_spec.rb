@@ -10,17 +10,6 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "Automatic Authentication at Signup" do
-
-  it "automatically authenticates a new user upon signup" do
-    valid_user = FactoryGirl.build(:user)
-    expect(logged_in?).to be_falsy
-    post :create, user: { email: valid_user.email, password: valid_user.password, password_confirmation: valid_user.password_confirmation }    
-    expect(logged_in?).to be_truthy
-  end
-
-  end
-
   describe "User Updating" do
 
     it "redirects when an unauthenticated client sends a PATCH or PUT request to users#update" do

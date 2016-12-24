@@ -38,6 +38,8 @@ RSpec.describe 'User Signup' do
     user_count_after_signup = User.count
     expect(user_count_after_signup).to eql(user_count_before_signup + 1)
     user = User.last
+    expect(page).to have_content("check your email")
+    expect(page).to have_current_path(root_path)    
     expect(user).not_to be_activated
     # Try to log in before activation.
     log_in_with(user.email, user.password)
