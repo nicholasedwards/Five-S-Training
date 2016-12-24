@@ -32,7 +32,7 @@ RSpec.describe 'User Signup' do
     expect(page).to have_current_path(signup_path)
   end
 
-  it "signs up a new user and validates the account" do
+  it "signs up a new user and activates the account" do
     user_count_before_signup = User.count
     sign_up_as("valid@example.com", "va1id_P@ssw0rd", "va1id_P@ssw0rd")
     user_count_after_signup = User.count
@@ -41,20 +41,22 @@ RSpec.describe 'User Signup' do
     expect(user).not_to be_activated
     # Try to log in before activation.
     log_in_with(user.email, user.password)
-    expect(user).not_to be_logged_in
+    expect(page).to have_content("account has not been activated")
+    expect(page).to have_current_path(login_path)
     # Try to activate an account with a valid email but invalid token
     visit edit_account_activation_path("invalid token", email: user.email)
-    expect(user).not_to be_logged_in
+    expect(page).to have_content("invalid activation link")
+    expect(page).to have_current_path(login_path)    
     # Try to activate an account with a valid token but invalid email
     visit edit_account_activation_path(user.activation_token, email: "invalid email")
-    expect(user).not_to be_logged_in
+    expect(page).to have_content("invalid activation link")
+    expect(page).to have_current_path(login_path)    
     # Try to activate an account with a valid token and valid email
     visit edit_account_activation_path(user.activation_token, email: user.email)
     user.reload
     expect(user).to be_activated
-    expect(user).to be_logged_in
-    expect(page).to have_current_path(lessons_path)	
-    expect(page).to have_content("successful")    
+    expect(page).to have_content("successfully activated")
+    expect(page).to have_current_path(lessons_path) 
   end
 	
 end
