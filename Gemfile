@@ -60,5 +60,8 @@ group :production do
   # Use Puma webserver in production
   gem 'puma'
 
+  # Enable better logging with rails_12factor
+  gem 'rails_12factor'
+
 end
 
