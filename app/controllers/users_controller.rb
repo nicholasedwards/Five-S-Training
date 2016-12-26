@@ -11,14 +11,14 @@ before_action :correct_user, only: [:edit, :update, :destroy]
 
   def create
     @user = User.new(user_params)
-  	if @user.save
+    if @user.save
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = "You now need to activate your account. Please check your email for the activation link."
       redirect_to root_path
-  	else
+    else
       store_errors_in_session_hash
       redirect_to signup_path
-  	end
+    end
   end
 
   def edit
