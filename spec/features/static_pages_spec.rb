@@ -23,5 +23,12 @@ RSpec.describe 'Static Pages' do
     click_on('Home')
     expect(page).to have_current_path(root_path)
   end
+
+  it "redirects from the static Home page to the Lessons index page when the user is logged in" do
+    user = FactoryGirl.build_stubbed(:user)
+    log_in_with(user.email, user.password)
+    visit root_path
+    expect(page).to have_current_path(lessons_path)
+  end
   
 end
