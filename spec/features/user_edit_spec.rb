@@ -26,7 +26,7 @@ RSpec.describe "User Editing" do
   it "redirects when a user visits the page for editing another user's profile" do
     log_in_with(user.email, user.password)
     visit edit_user_path(other_user)
-    expect(page).to have_current_path(root_path)
+    expect(page).to have_current_path(lessons_path)
   end
 
   it "displays an error message and renders the user edit template in the case of an unsuccessful profile update" do
