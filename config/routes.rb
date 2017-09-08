@@ -2,8 +2,6 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  get 'about' => 'static_pages#about' 
-
   get 'signup' => 'users#new'
 
   get 'confirm_deletion' => 'users#confirm_deletion'
@@ -14,7 +12,7 @@ Rails.application.routes.draw do
 
   delete 'logout' => 'sessions#destroy'
 
-  resources :users, only: [:create, :edit, :update, :destroy] 
+  resources :users, only: [:create, :edit, :update, :destroy]
 
   resources :lessons, only: [:show, :index]
 

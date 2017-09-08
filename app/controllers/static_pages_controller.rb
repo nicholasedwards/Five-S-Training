@@ -6,7 +6,4 @@ class StaticPagesController < ApplicationController
   	  redirect_to lessons_path
   	end
   end
-
-  def about
-  end
 end
